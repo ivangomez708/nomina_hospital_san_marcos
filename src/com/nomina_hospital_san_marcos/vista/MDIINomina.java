@@ -7,10 +7,15 @@ package com.nomina_hospital_san_marcos.vista;
 
 import com.nomina_hospital_san_marcos.controlador.ControladorNomina;
 import com.nomina_hospital_san_marcos.controlador.ControladorUsuario;
+import com.nomina_hospital_san_marcos.modelo.TecSistemas;
 import com.nomina_hospital_san_marcos.modelo.Trabajador;
 import com.nomina_hospital_san_marcos.modelo.Usuario;
+import java.beans.PropertyVetoException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -75,6 +80,9 @@ public class MDIINomina extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
+        JIFRegistrarTrabajador = new javax.swing.JInternalFrame();
+        TXTCrearTrabajador = new javax.swing.JTextField();
+        tbRegistrar = new javax.swing.JToggleButton();
         JIFLogin = new javax.swing.JInternalFrame();
         lblUsuario = new javax.swing.JLabel();
         lblContraseña = new javax.swing.JLabel();
@@ -100,6 +108,54 @@ public class MDIINomina extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        JIFRegistrarTrabajador.setClosable(true);
+        JIFRegistrarTrabajador.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        JIFRegistrarTrabajador.setIconifiable(true);
+        JIFRegistrarTrabajador.setMaximizable(true);
+        JIFRegistrarTrabajador.setResizable(true);
+        JIFRegistrarTrabajador.setTitle("Registro Trabajador");
+        JIFRegistrarTrabajador.setVisible(false);
+
+        TXTCrearTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXTCrearTrabajadorActionPerformed(evt);
+            }
+        });
+
+        tbRegistrar.setText("Registrar");
+        tbRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbRegistrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JIFRegistrarTrabajadorLayout = new javax.swing.GroupLayout(JIFRegistrarTrabajador.getContentPane());
+        JIFRegistrarTrabajador.getContentPane().setLayout(JIFRegistrarTrabajadorLayout);
+        JIFRegistrarTrabajadorLayout.setHorizontalGroup(
+            JIFRegistrarTrabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JIFRegistrarTrabajadorLayout.createSequentialGroup()
+                .addGroup(JIFRegistrarTrabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JIFRegistrarTrabajadorLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(TXTCrearTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JIFRegistrarTrabajadorLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(tbRegistrar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        JIFRegistrarTrabajadorLayout.setVerticalGroup(
+            JIFRegistrarTrabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JIFRegistrarTrabajadorLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(TXTCrearTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(tbRegistrar)
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+
+        desktopPane.add(JIFRegistrarTrabajador);
+        JIFRegistrarTrabajador.setBounds(330, 90, 210, 230);
 
         JIFLogin.setClosable(true);
         JIFLogin.setIconifiable(true);
@@ -143,10 +199,12 @@ public class MDIINomina extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(JIFLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnIngresar)
-                    .addGroup(JIFLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                        .addComponent(txtContraseña)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(JIFLoginLayout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addGroup(JIFLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtContraseña))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JIFLoginLayout.setVerticalGroup(
             JIFLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,13 +217,13 @@ public class MDIINomina extends javax.swing.JFrame {
                 .addGroup(JIFLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblContraseña)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnIngresar)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(58, 58, 58))
         );
 
         desktopPane.add(JIFLogin);
-        JIFLogin.setBounds(20, 10, 280, 200);
+        JIFLogin.setBounds(30, 10, 280, 200);
 
         JIFListarEmpleados.setClosable(true);
         JIFListarEmpleados.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -200,14 +258,14 @@ public class MDIINomina extends javax.swing.JFrame {
             .addGroup(JIFListarEmpleadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JIFListarEmpleadosLayout.setVerticalGroup(
             JIFListarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JIFListarEmpleadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         desktopPane.add(JIFListarEmpleados);
@@ -227,6 +285,11 @@ public class MDIINomina extends javax.swing.JFrame {
 
         InoCrearTrabajador.setMnemonic('s');
         InoCrearTrabajador.setText("Crear Trabajador");
+        InoCrearTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InoCrearTrabajadorActionPerformed(evt);
+            }
+        });
         fileMenu.add(InoCrearTrabajador);
 
         InoCalcularNomina.setMnemonic('a');
@@ -302,6 +365,14 @@ public class MDIINomina extends javax.swing.JFrame {
 
     private void InoListarTrabadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InoListarTrabadoresActionPerformed
         // TODO add your handling code here:
+        if(JIFListarEmpleados.isIcon())
+        {
+            try {
+                JIFListarEmpleados.setIcon(false);
+            } catch (PropertyVetoException ex) {
+                System.out.println("No se pudo restaurar el formulario listar trabajadores");
+            }
+        }
         JIFListarEmpleados.show();
         
     }//GEN-LAST:event_InoListarTrabadoresActionPerformed
@@ -337,6 +408,33 @@ public class MDIINomina extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void TXTCrearTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTCrearTrabajadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXTCrearTrabajadorActionPerformed
+
+    private void InoCrearTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InoCrearTrabajadorActionPerformed
+        // TODO add your handling code here:
+        if(JIFRegistrarTrabajador.isIcon())
+        {
+            try {
+                JIFRegistrarTrabajador.setIcon(Boolean.FALSE);
+            } catch (PropertyVetoException ex) {
+                System.out.println("No se encontraba minimizado");
+            }
+        }
+        JIFRegistrarTrabajador.show();
+        
+    }//GEN-LAST:event_InoCrearTrabajadorActionPerformed
+
+    private void tbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbRegistrarActionPerformed
+
+         Trabajador jaime = new TecSistemas("54628", "jaime castro", 2000000, false);
+         String mensaje= controlNomina.adicionarTrajador(jaime);
+         
+          llenarTrabajadores();
+         JOptionPane.showMessageDialog(rootPane, mensaje);
+    }//GEN-LAST:event_tbRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -380,7 +478,9 @@ public class MDIINomina extends javax.swing.JFrame {
     private javax.swing.JMenuItem InoSalir;
     private javax.swing.JInternalFrame JIFListarEmpleados;
     private javax.swing.JInternalFrame JIFLogin;
+    private javax.swing.JInternalFrame JIFRegistrarTrabajador;
     private javax.swing.JTable TBLTrabajadores;
+    private javax.swing.JTextField TXTCrearTrabajador;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JMenuItem contentMenuItem;
@@ -396,6 +496,7 @@ public class MDIINomina extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JToggleButton tbRegistrar;
     private javax.swing.JTextField txtContraseña;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables

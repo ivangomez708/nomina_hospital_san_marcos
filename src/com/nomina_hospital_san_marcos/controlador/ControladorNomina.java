@@ -28,6 +28,7 @@ public class ControladorNomina {
     private void inicializarTrabajadores()
     {
         trabadores[0]= new TecSistemas("1193032582", "Ivan Gomez", 3000000, false);
+        contTrabador++;
     }
     
     public String adicionarTrajador(Trabajador trab)
